@@ -1,25 +1,59 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState } from 'react';
 
-function App() {
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import Login from './components/Login';
+import { useNavigate ,state } from 'react-router-dom';
+
+
+import Home from './container/Home';
+import firebase from "firebase/compat/app";
+
+const App = () => {
+  const [user, setUser] = useState(null);
+ 
+
+  useEffect(() => 
+  
+  {
+    firebase.auth().onAuthStateChanged(user => {
+      setUser(user);
+    })
+      
+  }, [])
+  
+
+  console.log(user);
+
+
+
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+    <BrowserRouter>
+    <Routes className='text-3xl font-bold underline'>
+      <Route path= "/*" element={user ? <Home user={user}/> : <Login/>}/>
 
+      
+      
+    </Routes>
+
+    </BrowserRouter>
+  )
+}
 export default App;
+  /*   <BrowserRouter>
+        {user ? <Home user={user}/> : <Login/>}
+
+
+    <Routes className='text-3xl font-bold underline'>
+      <Route path="login" element={<Login />} />
+
+      <Route path="/" element={<Home/>} />
+      
+      
+    </Routes>
+
+    </BrowserRouter>
+  ) 
+}
+*/
