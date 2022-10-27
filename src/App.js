@@ -5,6 +5,7 @@ import Login from './components/Login';
 import { useNavigate ,state } from 'react-router-dom';
 
 
+
 import Home from './container/Home';
 import firebase from "firebase/compat/app";
 
@@ -31,7 +32,7 @@ const App = () => {
   return (
     <BrowserRouter>
     <Routes className='text-3xl font-bold underline'>
-      <Route path= "/*" element={user ? <Home user={user}/> : <Login/>}/>
+      <Route path= "/*" element={user ? <Home userinfo={user}/> : <Login/>}/>
 
       
       
