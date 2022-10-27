@@ -9,14 +9,20 @@ import firebase from "firebase/compat/app";
 const Home = ({user}) => {
 
   useEffect(() => {
+    user.providerData.forEach((userInfo) => {
+      console.log('User info for provider: ', userInfo.uid); 
+        
+      
  
       const doc = {
-        _id: "jhk",
+        _id: userInfo.uid,
         _type: 'user',
         userName: user.displayName,
         image: user.photoURL,
       };
-      client.createIfNotExists(doc);
+     
+        client.createIfNotExists(doc);
+      }) 
     }), [] 
 
   
