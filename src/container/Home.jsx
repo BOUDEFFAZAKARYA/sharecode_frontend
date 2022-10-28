@@ -10,7 +10,7 @@ import   UserProfile  from '../components/UserProfile';
 
 import Sidebar from '../components/Sidebar';
 
-import { userQuery } from '../utils/data';
+import { userQuery } from '../utils/data'; 
 import { client } from '../client';
 import Pins from './Pins';
 import logo from '../assets/logo.png';

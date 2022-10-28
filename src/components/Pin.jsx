@@ -10,42 +10,17 @@ import firebase from "firebase/compat/app";
 
 import { PinsQuery } from '../utils/data';
 
-const Pin = ({  userinfo  }) => {
-  const [postHovered, setPostHoverYed] = useState(false);
+const Pin = ({  pin  }) => {
+  const [postHovered, setPostHovered] = useState(false);
   const [savingPost, setSavingPost] = useState(false);
-  const [user, setUser] = useState();
-
-  const [pin, setPins] = useState();
-
-
 
   const navigate = useNavigate();
 
+  
 
-  useEffect(() => {
-    userinfo.providerData.forEach((user) => {
-      console.log('User info for provider: ', user); 
-      const query = userQuery(user?.uid);
+  const { image ,postedBy,  _id, destination } = pin;
 
-      client.fetch(query).then((data) => {
-        setUser(data[0]);
-        }) 
-   
-    })
-    const query = PinsQuery();
-
-      client.fetch(query).then((data) => {
-        setPins(data[0]);
-        }) 
-
-
-        console.log("pin"+pin);
-    
-
-
-
-
-  }), []
+  const user = localStorage.getItem('user') !== 'undefined' ? JSON.parse(localStorage.getItem('user')) : localStorage.clear();
 
   const deletePin = (id) => {
     client
@@ -55,7 +30,9 @@ const Pin = ({  userinfo  }) => {
       });
   };
 
+  let alreadySaved = pin?.save?.filter((item) => item?.postedBy?._id === user?.googleId);
 
+  alreadySaved = alreadySaved?.length > 0 ? alreadySaved : [];
 
   const savePin = (id) => {
     if (alreadySaved?.length === 0) {
@@ -80,6 +57,11 @@ const Pin = ({  userinfo  }) => {
     }
   };
 
+  useEffect(() =>{
+    console.log(image)
+ 
+   })
+
   return (
     <div className="m-2">
       <div
@@ -88,7 +70,7 @@ const Pin = ({  userinfo  }) => {
         onClick={() => navigate(`/pin-detail/${_id}`)}
         className=" relative cursor-zoom-in w-auto hover:shadow-lg rounded-lg overflow-hidden transition-all duration-500 ease-in-out"
       >
-          {pin?.image && (
+          {image && (
         <img className="rounded-lg w-full " src={(urlFor(image).width(250).url())} alt="user-post" /> )}
         {postHovered && (
           <div
@@ -155,6 +137,7 @@ const Pin = ({  userinfo  }) => {
           </div>
         )}
       </div>
+      
       <Link to={`/user-profile/${postedBy?._id}`} className="flex gap-2 mt-2 items-center">
        <img
           className="w-8 h-8 rounded-full object-cover"

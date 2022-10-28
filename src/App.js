@@ -34,7 +34,6 @@ const App = () => {
     <BrowserRouter>
     <Routes className='text-3xl font-bold underline'>
       <Route path= "/*" element={user ? <Home userinfo={user}/> : <Login/>}/>
-      <Route path="/" element={ <Pin userinfo={user}/> } />
       
       
     </Routes>
