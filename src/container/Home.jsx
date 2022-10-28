@@ -16,7 +16,6 @@ import Pins from './Pins';
 import logo from '../assets/logo.png';
 
 
-import firebase from "firebase/compat/app";
 const Home = ({userinfo}) => {
 
   const [toggleSidebar, setToggleSidebar] = useState(false);
