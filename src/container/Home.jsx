@@ -44,6 +44,8 @@ const Home = ({userinfo}) => {
       }) 
     })
   }), []
+
+  
   useEffect(() => {
     scrollRef.current.scrollTo(0, 0);
   });

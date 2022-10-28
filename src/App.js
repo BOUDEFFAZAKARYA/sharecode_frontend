@@ -8,6 +8,7 @@ import { useNavigate ,state } from 'react-router-dom';
 
 import Home from './container/Home';
 import firebase from "firebase/compat/app";
+import { Pin } from './components';
 
 const App = () => {
   const [user, setUser] = useState(null);
@@ -33,7 +34,7 @@ const App = () => {
     <BrowserRouter>
     <Routes className='text-3xl font-bold underline'>
       <Route path= "/*" element={user ? <Home userinfo={user}/> : <Login/>}/>
-
+      <Route path="/" element={ <Pin userinfo={user}/> } />
       
       
     </Routes>

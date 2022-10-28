@@ -28,7 +28,10 @@ export const userQuery = (userId) => {
     return query;
   };
   
-
+  export const PinsQuery = 
+     `*[_type == "pin" ]`;
+  ;
+  
 
   export const feedQuery = `*[_type == "pin"] | order(_createdAt desc) {
     image{
@@ -51,5 +54,6 @@ export const userQuery = (userId) => {
             image
           },
         },
-      } `;
+      } `
+     ;
   
